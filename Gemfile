@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -26,6 +26,7 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem "paperclip", "~> 4.3"
 gem 'aws-sdk', '~> 1.6'
 gem 'rest-client'
+gem 'rails_12factor'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
