@@ -5,5 +5,9 @@
   <%= @document.name %>
 </p>
 
+File:
+
+<iframe src="<%= @document.session_view_url %>" width='1000px' height='1500px'></iframe>
+
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>

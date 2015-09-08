@@ -22,5 +22,17 @@ module Kamisample
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_protocol => "https",
+      :bucket => ENV['PAPERCLIP_BUCKET'],
+      :s3_permissions => :private,
+      :s3_credentials => {
+        :access_key_id => ENV['S3_ACCESS_KEY_ID'],
+        :secret_access_key => ENV['S3_SECRET_ACCESS_KEY']
+      },
+    }
+
   end
 end
