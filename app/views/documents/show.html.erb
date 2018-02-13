@@ -7,7 +7,7 @@
 
 File:
 
-<iframe src="<%= @document.session_view_url %>" width='100%' height='1500px' allow="microphone" allow="camera"></iframe>
+<iframe src="<%= @document.session_view_url %>" width='100%' height='1500px' allow="microphone; camera"></iframe>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>
