@@ -9,11 +9,11 @@ setInterval(function() {
   contentWindow.postMessage({
     type: 'kamiembedding',
     request_name: 'getCurrentPage'
-  }, 'http://embed.kamihq.com');
+  }, 'https://embed.kamihq.com');
   contentWindow.postMessage({
     type: 'kamiembedding',
     request_name: 'getPageCount'
-  }, 'http://embed.kamihq.com');
+  }, 'https://embed.kamihq.com');
 }, 1000);
 
 
@@ -36,7 +36,7 @@ document.querySelector('#page-number').addEventListener('input', function(event)
     request_data: {
       page_number: event.target.value
     }
-  }, 'http://embed.kamihq.com');
+  }, 'https://embed.kamihq.com');
 });
 </script>
 <%= link_to 'Edit', edit_document_path(@document) %> |
