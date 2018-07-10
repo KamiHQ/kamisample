@@ -19,7 +19,7 @@ setInterval(function() {
 
 window.addEventListener('message', function(event) {
   console.log(event.data);
-  if(event.source == contentWindow) {
+  if(event.source == contentWindow && event.data.type === 'kamiembedding') {
     if (event.data.response_name === 'getCurrentPage') {
       document.querySelector('#page-number').value = event.data.response_data.page_number || 'null';
       document.querySelector('#page-number-span').innerText = event.data.response_data.page_number || 'null';
