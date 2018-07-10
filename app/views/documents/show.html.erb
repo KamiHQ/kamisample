@@ -1,13 +1,43 @@
 <p id="notice"><%= notice %></p>
+<div>Page: <input name="page-number" id="page-number" type="number"></input> Page Number:  <span id="page-number-span"></span> Pages: <span id="page-count"></span></div>
+<iframe src="<%= @document.session_view_url %>" width='100%' height='750px' allow="microphone; camera" id="document-iframe"></iframe>
 
-<p>
-  <strong>Name:</strong>
-  <%= @document.name %>
-</p>
+<script>
+var contentWindow = document.querySelector('#document-iframe').contentWindow;
 
-File:
+setInterval(function() {
+  contentWindow.postMessage({
+    type: 'kamiembedding',
+    request_name: 'getCurrentPage'
+  }, 'http://embed.kamihq.com');
+  contentWindow.postMessage({
+    type: 'kamiembedding',
+    request_name: 'getPageCount'
+  }, 'http://embed.kamihq.com');
+}, 1000);
 
-<iframe src="<%= @document.session_view_url %>" width='100%' height='1500px' allow="microphone; camera"></iframe>
 
+window.addEventListener('message', function(event) {
+  console.log(event.data);
+  if(event.source == contentWindow) {
+    if (event.data.response_name === 'getCurrentPage') {
+      document.querySelector('#page-number').value = event.data.response_data.page_number || 'null';
+      document.querySelector('#page-number-span').innerText = event.data.response_data.page_number || 'null';
+    } else if (event.data.response_name === 'getPageCount') { 
+      document.querySelector('#page-count').innerText = event.data.response_data.page_count || 'null';
+    }      
+  }
+})
+
+document.querySelector('#page-number').addEventListener('input', function(event) {
+  contentWindow.postMessage({
+    type: 'kamiembedding',
+    request_name: 'setCurrentPage',
+    request_data: {
+      page_number: event.target.value
+    }
+  }, 'http://embed.kamihq.com');
+});
+</script>
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>
